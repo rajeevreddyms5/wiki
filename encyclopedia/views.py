@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from django.http import HttpResponse
 from . import util
 
 
@@ -8,3 +8,5 @@ def index(request):
         "entries": util.list_entries()
     })
 
+def view(request, name):
+    return HttpResponse(util.get_entry(name))
