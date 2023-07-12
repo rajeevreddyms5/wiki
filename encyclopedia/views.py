@@ -28,3 +28,8 @@ def search_view(request):
         })
     else:
          return view_entry(request, query)
+     
+
+#new page entry function
+def new_page(request):
+    return render(request, "encyclopedia/newpage.html")
