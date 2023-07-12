@@ -42,7 +42,8 @@ def search_entries(search):
     """
     Returns a list of all names of encyclopedia entries with search substring.
     """
-    mylist = list_entries()
-    newlist = []
+    mylist = list_entries() #get all entries
+    newlist = [] #initialize new empty list
+    #search for substring
     newlist = list(filter(lambda v: re.search(rf'{search}', v, re.IGNORECASE), mylist))
     return newlist
