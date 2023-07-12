@@ -17,3 +17,4 @@ def view_entry(request, name):
             return HttpResponse(f"<title>{title}</title>{util.get_entry(name)}")
         else:
             return HttpResponseNotFound("<h1>Requested page was not found</h1>")
+    
