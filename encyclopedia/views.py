@@ -17,4 +17,14 @@ def view_entry(request, name):
             return HttpResponse(f"<title>{title}</title>{util.get_entry(name)}")
         else:
             return HttpResponseNotFound("<h1>Requested page was not found</h1>")
-    
+
+#search function    
+def search_view(request):
+    query_data = request.GET
+    query = query_data.get('q')
+    if util.get_entry(query) == None:
+         return render(request, "encyclopedia/search.html", {
+            "search_entries": util.search_entries(query)
+        })
+    else:
+         return view_entry(request, query)

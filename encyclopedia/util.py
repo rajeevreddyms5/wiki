@@ -35,3 +35,14 @@ def get_entry(title):
         return f.read().decode("utf-8")
     except FileNotFoundError:
         return None
+
+
+
+def search_entries(search):
+    """
+    Returns a list of all names of encyclopedia entries with search substring.
+    """
+    mylist = list_entries()
+    #newlist = list(filter(lambda v: re.search(rf'{search}', v), mylist))
+    newlist = list(filter(lambda element: f'{search}' in element, mylist))
+    return newlist
