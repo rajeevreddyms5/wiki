@@ -12,19 +12,20 @@
         <h1>
             Create New Page
         </h1>
-        <form>
+        <form action="{% url 'save_page' %}", method="post" >
             <!-- Title -->
             <div class="form-outline w-25 mb-4">
-            Title for page
-             <textarea class="form-control" id="textAreaExample4" rows="3"></textarea>
+            Enter the Title for page
+             <textarea class="form-control" id="textAreaExample4" rows="3" name="title"></textarea>
             <label class="form-label" for="textAreaExample4"></label>
             <br>
             <!-- Textarea without sizing class -->
             Enter the Markdown content for the page.
             <div class="form-outline mb-4">
-            <textarea class="form-control" id="textAreaExample6" rows="10"></textarea>
+            <textarea class="form-control" id="textAreaExample6" rows="10" name="content"></textarea>
             <label class="form-label" for="textAreaExample6"></label>
             <br>
-            <input type="submit" value="Submit">
+            <input type="submit" value="Save">
+            {% csrf_token %}
             </form>
     </body>
