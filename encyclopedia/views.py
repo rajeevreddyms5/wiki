@@ -65,7 +65,7 @@ def edit_page(request):
     title = query_data.get('edit')
     return render(request, "encyclopedia/editpage.html", {
         "name": title,
-        "view": util.get_entry(title)
+        "view": util.get_entry(title).strip(fr"^# {title}\n\n\n$")
     })
 
 
@@ -73,7 +73,8 @@ def edit_page(request):
 def save_edited_page(request):
     query_data = request.POST
     title = query_data.get('title')
-    content = query_data.get('content')
+    temp = query_data.get('content')
+    content = f"# {title}\n\n" + temp
     util.save_entry(title, content)
     return view_entry(request, title)
 
