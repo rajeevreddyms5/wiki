@@ -1,5 +1,5 @@
 import re
-
+from random import choice
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 
@@ -47,3 +47,9 @@ def search_entries(search):
     #search for substring
     newlist = list(filter(lambda v: re.search(rf'{search}', v, re.IGNORECASE), mylist))
     return newlist
+
+def random():
+    """
+    returns a random title name
+    """
+    return choice(list_entries())

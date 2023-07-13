@@ -77,3 +77,12 @@ def save_edited_page(request):
         "name": title,
         "view": util.get_entry(title)
     })
+
+
+# random page function
+def random_page(request):
+    name = util.random()
+    return render(request, "encyclopedia/viewpage.html", {
+        "name": name,
+        "view": util.get_entry(name)
+    })
