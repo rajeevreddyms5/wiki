@@ -71,7 +71,6 @@ def save_edited_page(request):
     query_data = request.POST
     title = query_data.get('title')
     temp = query_data.get('content')
-    content = f"# {title}\n\n" + temp
     util.save_entry(title, content)
     return view_entry(request, title)
 
