@@ -28,9 +28,12 @@ def search_view(request):
     query_data = request.GET
     query = query_data.get('q')
     if util.get_entry(query) == None:
-         return render(request, "encyclopedia/search.html", {
-            "search_entries": util.search_entries(query)
-        })
+        if len(util.search_entries(query)) == 0:
+             return view_entry(request, query) 
+        else:
+            return render(request, "encyclopedia/search.html", {
+                "search_entries": util.search_entries(query)
+            })
     else:
          return view_entry(request, query)
      
@@ -70,7 +73,7 @@ def edit_page(request):
 def save_edited_page(request):
     query_data = request.POST
     title = query_data.get('title')
-    temp = query_data.get('content')
+    content = query_data.get('content')
     util.save_entry(title, content)
     return view_entry(request, title)
 
