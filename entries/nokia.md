@@ -1,1 +1,1 @@
-closed due to competition
+closed due to competition and competition from andriod and ios

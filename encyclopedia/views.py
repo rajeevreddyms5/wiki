@@ -39,7 +39,7 @@ def new_page(request):
     return render(request, "encyclopedia/newpage.html")
 
 
-#save page function
+#save page function for view page
 def save_page(request):
     query_data = request.POST
     title = query_data.get('title')
@@ -55,3 +55,25 @@ def save_page(request):
                  "name": title,
                  "view": util.get_entry(title)
             })
+    
+
+#edit page function
+def edit_page(request):
+    query_data = request.POST
+    title = query_data.get('edit')
+    return render(request, "encyclopedia/editpage.html", {
+        "name": title,
+        "view": util.get_entry(title)
+    })
+
+
+#save page function for edit page
+def save_edited_page(request):
+    query_data = request.POST
+    title = query_data.get('title')
+    content = query_data.get('content')
+    util.save_entry(title, content)
+    return render(request, "encyclopedia/viewpage.html", {
+        "name": title,
+        "view": util.get_entry(title)
+    })

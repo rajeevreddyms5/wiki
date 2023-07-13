@@ -1,0 +1,29 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Edit {{ name }}Page
+{% endblock %}
+
+{% block body %}
+    <h1>Edit {{ name }} Page</h1>
+
+    <form action="{% url 'save_edited_page' %}", method="post" >
+        {% csrf_token %}
+        <!-- Title -->
+        <div class="form-outline w-25 mb-4">
+        Edit the Title of the page
+        <textarea class="form-control" id="textAreaExample4" rows="1" name="title">{{ name }}</textarea>
+        <label class="form-label" for="textAreaExample4"></label>
+        
+        <br>
+
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Edit the Markdown content of the page.</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" name="content">{{ view }}</textarea>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Save</button>
+        
+        </form>
+
+{% endblock %}
