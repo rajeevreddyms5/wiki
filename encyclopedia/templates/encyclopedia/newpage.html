@@ -1,31 +1,31 @@
-{% load static %}
+{% extends "encyclopedia/layout.html" %}
 
-<!DOCTYPE html>
+{% block title %}
+    Create New Page
+{% endblock %}
 
-<html lang="en">
-    <head>
-        <title>Create New Page</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link href="{% static 'encyclopedia/styles.css' %}" rel="stylesheet">
-    </head>
-    <body>
-        <h1>
-            Create New Page
-        </h1>
-        <form action="{% url 'save_page' %}", method="post" >
-            <!-- Title -->
-            <div class="form-outline w-25 mb-4">
-            Enter the Title for page
-             <textarea class="form-control" id="textAreaExample4" rows="3" name="title"></textarea>
-            <label class="form-label" for="textAreaExample4"></label>
-            <br>
-            <!-- Textarea without sizing class -->
-            Enter the Markdown content for the page.
-            <div class="form-outline mb-4">
-            <textarea class="form-control" id="textAreaExample6" rows="10" name="content"></textarea>
-            <label class="form-label" for="textAreaExample6"></label>
-            <br>
-            <input type="submit" value="Save">
-            {% csrf_token %}
-            </form>
-    </body>
+{% block body %}
+    <h1>Create New Page</h1>
+
+    <form action="{% url 'save_page' %}", method="post" >
+        {% csrf_token %}
+        <!-- Title -->
+        <div class="form-outline w-25 mb-4">
+        Enter the Title of the page
+         <textarea class="form-control" id="textAreaExample4" rows="1" name="title"></textarea>
+        <label class="form-label" for="textAreaExample4"></label>
+        
+        <br>
+
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Enter the Markdown content of the page.</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" name="content"></textarea>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Save</button>
+        
+        </form>
+
+{% endblock %}
+
+
