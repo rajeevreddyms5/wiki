@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound
 from . import util
+import markdown2
 
 
 def index(request):
@@ -14,7 +15,7 @@ def view_entry(request, name):
         if util.get_entry(name):
             return render(request, "encyclopedia/viewpage.html", {
                  "name": name,
-                 "view": util.get_entry(name)
+                 "view": markdown2.markdown(util.get_entry(name))
             })
         else:
             return render(request, "encyclopedia/viewpage.html", {
@@ -43,7 +44,8 @@ def new_page(request):
 def save_page(request):
     query_data = request.POST
     title = query_data.get('title')
-    content = query_data.get('content')
+    temp = query_data.get('content')
+    content = f"# {title}\n\n" + temp
     if util.get_entry(title):
             return render(request, "encyclopedia/viewpage.html", {
                  "name": title,
@@ -51,10 +53,7 @@ def save_page(request):
             })
     else:
         util.save_entry(title, content)
-        return render(request, "encyclopedia/viewpage.html", {
-                 "name": title,
-                 "view": util.get_entry(title)
-            })
+        return view_entry(request, title)
     
 
 #edit page function
@@ -71,18 +70,13 @@ def edit_page(request):
 def save_edited_page(request):
     query_data = request.POST
     title = query_data.get('title')
-    content = query_data.get('content')
+    temp = query_data.get('content')
+    content = f"# {title}\n\n" + temp
     util.save_entry(title, content)
-    return render(request, "encyclopedia/viewpage.html", {
-        "name": title,
-        "view": util.get_entry(title)
-    })
+    return view_entry(request, title)
 
 
 # random page function
 def random_page(request):
-    name = util.random()
-    return render(request, "encyclopedia/viewpage.html", {
-        "name": name,
-        "view": util.get_entry(name)
-    })
+    title = util.random()
+    return view_entry(request, title)

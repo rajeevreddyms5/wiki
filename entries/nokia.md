@@ -1,1 +1,0 @@
-closed due to competition and competition from andriod and ios

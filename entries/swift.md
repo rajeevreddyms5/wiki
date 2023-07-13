@@ -1,1 +1,0 @@
-apple created it
